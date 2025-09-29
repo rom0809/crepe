@@ -4,35 +4,60 @@
   <meta charset="UTF-8">
   <title>신청 안내</title>
   <style>
-    body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; line-height: 1.7; padding: 20px; }
-    h2 { margin-top: 0; }
+    body {
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+      padding: 15px;
+      background: transparent;
+      text-align: center;
+    }
     .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
-    a { color: #2b6cb0; text-decoration: none; }
+    a { color: #2b6cb0; text-decoration: none; word-break: break-all; }
     a:hover { text-decoration: underline; }
-    #copyBtn { padding: 8px 14px; border: none; background: #4CAF50; color: white; border-radius: 4px; cursor: pointer; }
+    #copyBtn {
+      padding: 8px 14px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
     #copyBtn:hover { background: #45a049; }
+    #content {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 850px;
+      margin: 0 auto 20px auto;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
+  <button id="copyBtn">📋 복사하기</button>
+
   <div id="content">
-    <p>안녕하세요! 냐베입니다. <br> 아래로 신청 안내 사항 전달드립니다. 좋은 하루 되시길 바랍니다(*^ω^)🍀🍀</p>
+    <p>안녕하세요! 냐베입니다.<br>
+    아래로 신청 안내 사항 전달드립니다. 좋은 하루 되시길 바랍니다(*^ω^)🍀🍀</p>
 
     <p><b>📌 신청 내용 안내</b></p>
-
     <div class="divider"></div>
 
     <p><b>신청 타입 |</b></p>
     <p><b>총 금액 |</b> ,000원</p>
 
-    <p>🔗 <b>일정 확인 시트 |</b>  
-    <a href="https://www.notion.so/1bb0d419218e8148850bf98ebac17004?source=copy_link" target="_blank">
+    <p>🔗 <b>일정 확인 시트 |</b><br>
+    <a href="https://www.notion.so/1bb0d419218e8148850bf98ebac17004" target="_blank">
       https://www.notion.so/1bb0d419218e8148850bf98ebac17004
     </a></p>
 
-    <p>※ 입금 확인 후 일정이 자동으로 시트에 등록됩니다.  간혹 안내 과정에서 일정이 다르게 전달되는 경우가 있으니, 정확한 기간은 시트 내용을 기준으로 확인 부탁드립니다.  만약 차이가 있다면 언제든 편하게 말씀해주세요.</p>
+    <p>※ 입금 확인 후 일정이 자동으로 시트에 등록됩니다.<br>
+    간혹 안내 과정에서 일정이 다르게 전달되는 경우가 있으니,<br>
+    정확한 기간은 시트 내용을 기준으로 확인 부탁드립니다.<br>
+    만약 차이가 있다면 언제든 편하게 말씀해주세요.</p>
   </div>
-
-  <button id="copyBtn">📋 복사하기</button>
 
   <script>
     document.getElementById("copyBtn").addEventListener("click", () => {
@@ -41,12 +66,11 @@
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
-
       try {
         document.execCommand("copy");
-        alert("서식 포함 복사 완료! 🍀🍀");
+        alert("서식 포함 복사 완료! 🍀");
       } catch (err) {
-        alert("복사 실패😭: " + err);
+        alert("복사에 실패했어요😭: " + err);
       }
       selection.removeAllRanges();
     });
