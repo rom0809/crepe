@@ -9,7 +9,7 @@
       line-height: 1.7;
       padding: 15px;
       background: transparent;
-      text-align: center;
+      text-align: left;
     }
     .divider { border-bottom: 2px solid #ddd; margin: 16px 0; }
     a { color: #2b6cb0; text-decoration: none; word-break: break-all; }
@@ -22,6 +22,9 @@
       border-radius: 4px;
       cursor: pointer;
       margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     #copyBtn:hover { background: #45a049; }
     #content {
@@ -60,27 +63,32 @@
   </div>
 
   <script>
-    document.getElementById("copyBtn").addEventListener("click", async () => {
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      const content = document.getElementById("content");
+
+      // ✅ 첫 줄 공백 제거된 HTML 생성
+      const html = content.innerHTML.replace(/^\s+/, "");
+      const tempEl = document.createElement("div");
+      tempEl.innerHTML = html;
+      document.body.appendChild(tempEl);
+
+      // 복사 범위 지정
       const range = document.createRange();
-      range.selectNode(document.getElementById("content"));
+      range.selectNodeContents(tempEl);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
+
       try {
-        // 기본 복사 수행
-        document.execCommand("copy");
-
-        // 복사된 텍스트 가져와 앞줄 공백 제거
-        const cleanedText = selection.toString().trimStart();
-
-        // Clipboard API로 덮어쓰기
-        await navigator.clipboard.writeText(cleanedText);
-
-        alert("서식 포함 복사 완료! 🍀");
+        const success = document.execCommand("copy");
+        if (success) alert("서식 포함 복사 완료! 🍀");
+        else alert("복사에 실패했어요 😭");
       } catch (err) {
-        alert("복사에 실패했어요😭: " + err);
+        alert("복사 오류: " + err);
       }
+
       selection.removeAllRanges();
+      tempEl.remove();
     });
   </script>
 </body>
